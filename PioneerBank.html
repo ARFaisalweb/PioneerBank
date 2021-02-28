@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pioneer Bank</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="PioneerStyle.css">
+</head>
+<body>
+        <div id="login-form">
+            <h1 class="text-center">Welcome To Pioneer Bank</h1>
+            <div class="submit-area">
+                <h2>Login</h2>
+                <input type="text" placeholder="Email" class="form-control">
+                <br>
+                <input type="password" placeholder="Password" class="form-control">
+                <br>
+                <button id="login" class="btn btn-success">Enter</button>
+            </div>
+        </div>
+        <div id="transaction-area">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="deposit status">
+                        <h5>Deposit</h5>
+                        <h2>$ <span id="current-deposit">00</span></h2>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="withdrow status">
+                        <h5>Withdrow</h5>
+                        <h2>$ <span id="current-withdrow">00</span></h2>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="balance status">
+                        <h5>Balance</h5>
+                        <h2>$ <span id="current-balance">1200</span></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                   <div class="submit-area">
+                        <h4>Deposit</h4>
+                        <input id="deposit-input" type="text" placeholder="$ amount you want to deposit" class="form-control">
+                        <br>
+                        <button class="btn btn-success" id="deposit-btn">Deposit</button>
+                   </div>
+                </div>
+                <div class="col-md-6">
+                   <div class="submit-area">
+                        <h4>Withdrow</h4>
+                        <input id="withdrow-input" type="text" placeholder="$ amount you want to withdrow" class="form-control">
+                        <br>
+                        <button class="btn btn-success" id="withdrow-btn">Withdrow</button>
+                   </div>
+                </div>
+            </div>
+
+        </div>
+
+    <script>
+        //login button event halder.
+        const loginBtn = document.getElementById("login");
+            loginBtn.addEventListener("click", function(){
+                const loginArea = document.getElementById("login-form");
+                loginArea.style.display = "none";
+
+            const transactionArea = document.getElementById("transaction-area");
+             transactionArea.style.display = "block";
+        });
+        //deposit button event handler.
+        const depositBtn = document.getElementById("deposit-btn");
+        depositBtn.addEventListener("click", function(){
+            const depositInput = document.getElementById("deposit-input").value;
+            const depositNumber = parseFloat(depositInput);
+
+            const currentDeposit = document.getElementById("current-deposit").innerText;
+            const currentDepositNumber = parseFloat(currentDeposit);
+            const totalDeposit = depositNumber + currentDepositNumber;
+            
+            document.getElementById("current-deposit").innerText = totalDeposit;
+            document.getElementById("deposit-input").value = "";
+
+            const currentBalance = document.getElementById("current-balance").innerText;
+            const currentBalanceNumber = parseFloat(currentBalance);
+            const totalBalance = depositNumber + currentBalanceNumber;
+            document.getElementById("current-balance").innerText = totalBalance;
+        })
+        //withdrow event button handler.
+        const withdrowBtn = document.getElementById("withdrow-btn");
+        withdrowBtn.addEventListener("click", function(){
+            const withdrowInput = document.getElementById("withdrow-input").value;
+            const withdrowNumber = parseFloat(withdrowInput);
+
+            const currentWithdrow = document.getElementById("current-withdrow").innerText;
+            const currentWithdrowNumber = parseFloat(currentWithdrow);
+            const totalWithdrow = withdrowNumber + currentWithdrowNumber;
+            document.getElementById("current-withdrow").innerText = totalWithdrow;
+            document.getElementById("withdrow-input").value = "";
+
+            const currentBalance = document.getElementById("current-balance").innerText;
+            const currentBalanceNumber = parseFloat(currentBalance);
+            const totalBalance = currentBalanceNumber - withdrowNumber;
+            document.getElementById("current-balance").innerText = totalBalance;
+        })
+    </script>    
+</body>
+</html>
